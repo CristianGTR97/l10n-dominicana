@@ -15,16 +15,10 @@ class ResCompany(models.Model):
         "to have sales through offline mobile devices such as "
         "sales with Handheld, enter others.",
     )
-    l10n_do_disable_fiscal_documents = fields.Boolean(
-        string="Disable Fiscal Documents",
-        help="Disable Dominican fiscal document management for this company.",
-    )
 
     def _localization_use_documents(self):
         """Dominican localization uses documents"""
         self.ensure_one()
-        if self.l10n_do_disable_fiscal_documents:
-            return False
         return (
             True
             if self.country_id == self.env.ref("base.do")
